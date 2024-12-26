@@ -664,4 +664,117 @@
   - Для перетворення: `map`.
   - Для пошуку: `find` / `findIndex`.
   - Для ітерації: `forEach` / `for...of`.
+
+</details>
+
+<details>
+<summary>17. Що таке JSON і як працювати з ним у JavaScript?</summary>
+
+- **JSON (JavaScript Object Notation)** — це текстовий формат обміну даними, що легко читається як людиною, так і комп'ютером. Його використовують для передачі даних між клієнтом і сервером. Формат базується на синтаксисі об'єктів JavaScript, але підтримується в багатьох мовах програмування.
+
+- **Основні особливості JSON:**
+
+1. **Ключі:**
+
+   - Завжди рядки.
+   - Беруться в подвійні лапки ("").
+
+2. **Значення:**
+
+   - Можуть бути: рядками, числами, логічними значеннями, масивами, об'єктами, null.
+   - Не підтримує функції, undefined, NaN.
+
+- Приклад JSON:
+
+  ```JSON
+  {
+  "name": "Alice",
+  "age": 25,
+  "isStudent": false,
+  "courses": ["Math", "Physics"],
+  "address": { "city": "Kyiv", "zip": "01001" }
+  }
+
+  ```
+
+- **Як працювати з JSON у JavaScript?**
+
+1. **Перетворення об'єкта у JSON (`JSON.stringify`)**:
+
+   - Використовується для перетворення JavaScript-об'єкта в JSON-рядок.
+
+   ```javascript
+   const user = {
+     name: "Alice",
+     age: 25,
+     isStudent: false,
+   };
+
+   const jsonString = JSON.stringify(user);
+   console.log(jsonString);
+   // Виведе: '{"name":"Alice","age":25,"isStudent":false}'
+   ```
+
+2. **Перетворення JSON у об'єкт (`JSON.parse`)**:
+
+   - Використовується для перетворення JSON-рядка у JavaScript-об'єкт.
+
+   ```javascript
+   const jsonString = '{"name":"Alice","age":25,"isStudent":false}';
+
+   const user = JSON.parse(jsonString);
+   console.log(user);
+   // Виведе: { name: 'Alice', age: 25, isStudent: false }
+   ```
+
+- **Робота з сервером:**
+
+  Передача даних у форматі JSON:
+
+1. Надсилання даних:
+
+   - Використовуйте fetch із JSON.stringify для передачі JSON.
+
+   ```javascript
+   const data = { name: "Alice", age: 25 };
+
+   fetch("https://example.com/api", {
+     method: "POST",
+     headers: { "Content-Type": "application/json" },
+     body: JSON.stringify(data),
+   });
+   ```
+
+2. Отримання даних:
+
+   - Використовуйте fetch із JSON.parse для обробки відповіді.
+
+   ```javascript
+   fetch("https://example.com/api")
+     .then((response) => response.json())
+     .then((data) => console.log(data));
+   ```
+
+- **Типові помилки:**
+
+1. **Неправильний формат JSON:**
+
+   ```javascript
+   const invalidJson = "{ name: 'Alice' }"; // Помилка: ключі та рядки без подвійних лапок
+   JSON.parse(invalidJson); // Викине помилку
+   ```
+
+2. **Перетворення циклічного об'єкта:**
+
+   ```javascript
+   const obj = {};
+   obj.self = obj;
+   JSON.stringify(obj); // Викине помилку: Converting circular structure to JSON
+   ```
+
+- **Застосування JSON:**
+
+  - Обмін даними між клієнтом і сервером.
+  - Збереження налаштувань у файлах чи локальному сховищі.
+  - API для роботи з веб-сервісами.
   </details>
