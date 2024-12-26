@@ -503,3 +503,165 @@
   - Звичайні функції варто використовувати для більш складних сценаріїв, що потребують власного `this`, `arguments` або можливості виклику через `new`.
 
 </details>
+
+<details>
+<summary>16. Які методи перебору масивів ви знаєте?</summary>
+
+- Основні методи перебору масивів у JavaScript:
+
+1.  `forEach`
+
+    - Викликає передану функцію для кожного елемента масиву.
+    - Нічого не повертає (завжди undefined).
+
+    ```javascript
+    const arr = [1, 2, 3];
+    arr.forEach((num) => console.log(num));
+    // Виведе: 1, 2, 3
+    ```
+
+2.  `map`
+
+    - Створює новий масив, застосовуючи передану функцію до кожного елемента.
+    - Не змінює вихідний масив.
+
+    ```javascript
+    const arr = [1, 2, 3];
+    const doubled = arr.map((num) => num * 2);
+    console.log(doubled); // [2, 4, 6]
+    ```
+
+3.  `filter`
+
+    - Створює новий масив із елементів, що відповідають умовам функції.
+
+    ```javascript
+    const arr = [1, 2, 3, 4];
+    const even = arr.filter((num) => num % 2 === 0);
+    console.log(even); // [2, 4]
+    ```
+
+4.  `reduce`
+
+    - Агрегує масив в одне значення, використовуючи функцію та початкове значення.
+
+    ```javascript
+    const arr = [1, 2, 3];
+    const sum = arr.reduce((acc, num) => acc + num, 0);
+    console.log(sum); // 6
+    ```
+
+5.  `some`
+
+    - Повертає true, якщо хоч один елемент відповідає умові.
+
+    ```javascript
+    const arr = [1, 2, 3];
+    console.log(arr.some((num) => num > 2)); // true
+    ```
+
+6.  `every`
+
+    - Повертає true, якщо всі елементи відповідають умові.
+
+    ```javascript
+    const arr = [2, 4, 6];
+    console.log(arr.every((num) => num % 2 === 0)); // true
+    ```
+
+7.  `find`
+
+    - Повертає перший елемент, що відповідає умові, або undefined.
+
+    ```javascript
+    const arr = [1, 2, 3];
+    console.log(arr.find((num) => num > 1)); // 2
+    ```
+
+8.  `findIndex`
+
+    - Повертає індекс першого елемента, що відповідає умові, або -1.
+
+    ```javascript
+    const arr = [1, 2, 3];
+    console.log(arr.findIndex((num) => num > 1)); // 1
+    ```
+
+9.  `flatMap`
+
+    - Поєднує функціональність map і flat. Повертає плоский масив.
+
+    ```javascript
+    const arr = [1, 2, 3];
+    console.log(arr.flatMap((num) => [num, num * 2])); // [1, 2, 2, 4, 3, 6]
+    ```
+
+10. `keys`, `values`, `entries`
+
+    - keys: ітератор ключів (індексів).
+    - values: ітератор значень.
+    - entries: ітератор пар [індекс, значення].
+
+    ```javascript
+    const arr = ["a", "b", "c"];
+    for (let key of arr.keys()) console.log(key); // 0, 1, 2
+    for (let value of arr.values()) console.log(value); // 'a', 'b', 'c'
+    for (let [index, value] of arr.entries()) console.log(index, value); // 0 'a', 1 'b', 2 'c'
+    ```
+
+11. `for...of`
+
+    - Простий синтаксис для ітерації масивів.
+
+    ```javascript
+    const arr = [1, 2, 3];
+    for (const num of arr) console.log(num);
+    // Виведе: 1, 2, 3
+    ```
+
+12. `sort`
+
+    - Сортує масив на місці.
+
+    ```javascript
+    const arr = [3, 1, 2];
+    arr.sort((a, b) => a - b);
+    console.log(arr); // [1, 2, 3]
+    ```
+
+13. `reverse`
+
+    - Перевертає порядок елементів у масиві.
+
+    ```javascript
+    const arr = [1, 2, 3];
+    arr.reverse();
+    console.log(arr); // [3, 2, 1]
+    ```
+
+14. `slice`
+
+    - Повертає копію частини масиву.
+
+    ```javascript
+    const arr = [1, 2, 3];
+    const subArr = arr.slice(1);
+    console.log(subArr); // [2, 3]
+    ```
+
+15. `splice`
+
+    - Додає, видаляє або замінює елементи в масиві.
+
+    ```javascript
+    const arr = [1, 2, 3];
+    arr.splice(1, 1, 4); // Видаляє 1 елемент із позиції 1, додає 4
+    console.log(arr); // [1, 4, 3]
+    ```
+
+- **Вибір методу залежить від задачі:**
+  - Для фільтрації: `filter`.
+  - Для перетворення: `map`.
+  - Для пошуку: `find` / `findIndex`.
+  - Для ітерації: `forEach` / `for...of`.
+  </details>
