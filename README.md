@@ -171,6 +171,7 @@
 
 </details>
 
+<details>
 <summary>10. У чому відмінності LocalStorage від SessionStorage?</summary>
 
 - **LocalStorage:**
