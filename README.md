@@ -778,3 +778,119 @@
   - Збереження налаштувань у файлах чи локальному сховищі.
   - API для роботи з веб-сервісами.
   </details>
+
+<details>
+<summary>18. Як виконується асинхронний код у JavaScript?</summary>
+
+- Асинхронний код у JavaScript виконується за допомогою подій, колбеків, промісів і `async/await`. Виконання базується на подійному циклі (Event Loop), що дозволяє обробляти асинхронні задачі поза основним потоком виконання.
+
+- **Механізми асинхронного виконання:**
+
+1. **Події та Колбеки**
+
+- Код виконується, коли завершується асинхронна операція (наприклад, таймер, запит до сервера).
+- Колбек-функції викликаються після завершення операції.
+
+  ```javascript
+  setTimeout(() => {
+    console.log("Асинхронно через 1 секунду");
+  }, 1000);
+  console.log("Цей код виконається першим");
+  // Виведе:
+  // Цей код виконається першим
+  // Асинхронно через 1 секунду
+  ```
+
+2. **Проміси (`Promises`)**
+
+   - `Promise` представляє операцію, яка виконується асинхронно та може завершитися успішно або з помилкою.
+   - Має методи `.then` і `.catch` для обробки результату.
+
+   ```javascript
+   const promise = new Promise((resolve, reject) => {
+     setTimeout(() => resolve("Дані отримано"), 1000);
+   });
+
+   promise
+     .then((data) => console.log(data)) // Виведе: Дані отримано
+     .catch((err) => console.error(err));
+   ```
+
+3. `async/await`
+
+   - Синтаксичний цукор для роботи з промісами.
+   - Дозволяє писати асинхронний код так, ніби він синхронний.
+
+   ```javascript
+   const fetchData = async () => {
+     try {
+       const response = await fetch(
+         "https://jsonplaceholder.typicode.com/posts/1"
+       );
+       const data = await response.json();
+       console.log(data);
+     } catch (error) {
+       console.error("Помилка:", error);
+     }
+   };
+
+   fetchData();
+   ```
+
+- **Ключові поняття:**
+
+1. **Event Loop (Цикл подій):**
+
+- Основний механізм, що дозволяє виконувати асинхронний код.
+- Розподіляє задачі між:
+
+  - **Call Stack** (стек викликів): виконує синхронний код.
+  - **Task Queue** (черга задач): для колбеків від `setTimeout`, DOM-подій.
+  - **Microtask Queue**: для промісів та `async/await`.
+
+2. **Microtasks vs. Macrotasks**:
+
+- Microtasks (вищий пріоритет): Promise.then, MutationObserver.
+- Macrotasks: setTimeout, setInterval, I/O, події DOM.
+
+  ```javascript
+  console.log("Початок");
+
+  setTimeout(() => console.log("Macrotask"), 0);
+
+  Promise.resolve().then(() => console.log("Microtask"));
+
+  console.log("Кінець");
+
+  // Виведе:
+  // Початок
+  // Кінець
+  // Microtask
+  // Macrotask
+  ```
+
+- **Приклади:**
+
+1. **Асинхронний ланцюжок:**
+
+   ```javascript
+   fetch("https://jsonplaceholder.typicode.com/posts/1")
+     .then((response) => response.json())
+     .then((data) => console.log(data))
+     .catch((err) => console.error("Помилка:", err));
+   ```
+
+2. **Паралельне виконання:**
+
+   ```javascript
+   const promise1 = fetch("https://jsonplaceholder.typicode.com/posts/1");
+   const promise2 = fetch("https://jsonplaceholder.typicode.com/posts/2");
+
+   Promise.all([promise1, promise2])
+     .then((responses) => Promise.all(responses.map((r) => r.json())))
+     .then((data) => console.log(data));
+   ```
+
+Асинхронний код дозволяє виконувати тривалі операції без блокування головного потоку.
+
+</details>
