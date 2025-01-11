@@ -5,7 +5,7 @@
 If you discover a security issue in any of my projects, I would greatly appreciate your help in resolving it responsibly. Here's how you can report it:
 
 1. **Contact me:**  
-   Please send an email to **[victor.svertoka@icloud.com](mailto:victor.svertoka@icloud.com)** with:
+   Please send an email to **[frontendlovers@gmail.com](mailto:frontendlovers@gmail.com)** with:
 
    - A clear description of the issue.
    - Steps to reproduce the vulnerability.
