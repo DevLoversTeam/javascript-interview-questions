@@ -6502,7 +6502,66 @@ console.log(Object.isSealed(obj)); // true
 </details>
 
 <details>
-<summary>110. ???</summary>
+<summary>110. Навіщо використовується властивість .dataset?</summary>
+
+#### .dataset
+
+- `dataset` використовується для доступу до спеціальних атрибутів HTML, які починаються з `data-`. Це зручний спосіб зберігати кастомні дані в елементах DOM.
+
+#### Особливості:
+
+1. **Доступ до даних:**
+
+- Через dataset можна отримати або змінити значення атрибутів data- як властивостей об'єкта.
+
+```html
+<div id="element" data-id="123" data-name="example"></div>
+```
+
+```javascript
+const elem = document.getElementById("element");
+console.log(elem.dataset.id); // "123"
+console.log(elem.dataset.name); // "example"
+```
+
+2. **Створення та оновлення:**
+
+```javascript
+elem.dataset.newAttr = "value"; // Додає data-new-attr="value"
+elem.dataset.id = "456"; // Оновлює data-id="456"
+```
+
+3. **Іменування:**
+
+- Кебаб-кейс у HTML (`data-user-id`) перетворюється в camelCase у JavaScript (`dataset.userId`).
+
+4. **Видалення:**
+
+```javascript
+delete elem.dataset.newAttr; // Видаляє data-new-attr
+```
+
+#### Переваги:
+
+- Інкапсуляція даних, пов'язаних із елементом, без необхідності створення окремих JavaScript-змінних.
+- Зручно використовувати для динамічної взаємодії елементів із JavaScript, наприклад, у додатках або при роботі з атрибутами.
+
+#### Приклад використання:
+
+```html
+<button data-action="save" data-user-id="42">Save</button>
+```
+
+```javascript
+const button = document.querySelector("button");
+console.log(button.dataset.action); // "save"
+console.log(button.dataset.userId); // "42"
+```
+
+</details>
+
+<details>
+<summary>111. ???</summary>
 
 - Coming soon...😎
 
