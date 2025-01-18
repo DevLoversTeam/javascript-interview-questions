@@ -7549,6 +7549,109 @@ class Example {}
 </details>
 
 <details>
+<summary>124. Як можна створити об'єкти з приватними властивостями та методами JavaScript?</summary>
+
+#### Методи створення об'єктів із приватними властивостями та методами в JavaScript:
+
+1. **Використання слабких карт (WeakMap):**
+
+   - Використовується для створення дійсно приватних властивостей, які недоступні за межами об'єкта.
+
+```javascript
+const privateData = new WeakMap();
+
+class Example {
+  constructor(value) {
+    privateData.set(this, { secret: value });
+  }
+
+  getSecret() {
+    return privateData.get(this).secret;
+  }
+}
+
+const obj = new Example("hidden");
+console.log(obj.getSecret()); // "hidden"
+console.log(obj.secret); // undefined
+```
+
+2. **Використання `#` (приватні поля та методи):**
+
+   - Приватні поля та методи, позначені символом #, доступні лише всередині класу.
+
+```javascript
+class Example {
+  #secret;
+
+  constructor(value) {
+    this.#secret = value;
+  }
+
+  getSecret() {
+    return this.#secret;
+  }
+}
+
+const obj = new Example("hidden");
+console.log(obj.getSecret()); // "hidden"
+console.log(obj.#secret); // SyntaxError: Private field '#secret' must be declared in an enclosing class
+```
+
+3. **Використання замикань:**
+
+   - Замикання забезпечують приватність через обмежений доступ до внутрішніх змінних функції.
+
+```javascript
+function Example(value) {
+  let secret = value;
+
+  return {
+    getSecret: function () {
+      return secret;
+    },
+  };
+}
+
+const obj = Example("hidden");
+console.log(obj.getSecret()); // "hidden"
+console.log(obj.secret); // undefined
+```
+
+4. **Комбінація `Symbol` для унікальності:**
+
+   - Symbol дозволяє створювати властивості, які не конфліктують із іншими.
+
+```javascript
+const secretKey = Symbol("secret");
+
+class Example {
+  constructor(value) {
+    this[secretKey] = value;
+  }
+
+  getSecret() {
+    return this[secretKey];
+  }
+}
+
+const obj = new Example("hidden");
+console.log(obj.getSecret()); // "hidden"
+console.log(obj.secretKey); // undefined
+```
+
+#### Коли використовувати:
+
+    - **WeakMap:** Для складних сценаріїв, коли об'єкт потребує багатьох приватних властивостей.
+
+    - **`#` (Приватні поля):** Простий та сучасний спосіб для класів.
+
+    - **Замикання:** Для функціональних підходів.
+
+    - **Symbol:** Для унікальних властивостей із частковою приватністю.
+
+</details>
+
+<details>
 <summary>124. ???</summary>
 
 - Coming soon...😎
