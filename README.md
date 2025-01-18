@@ -1,6 +1,8 @@
-# JavaScript <img src="./assets/javascript.svg" width="40" height="40" />
+<h1>
+  JavaScript <img src="./assets/javascript.svg" width="40" height="40" />
+</h1>
 
-## Найпопулярніші запитання та відповіді на співбесіді з JavaScript
+<h2>Найпопулярніші запитання та відповіді на співбесіді з JavaScript</h2>
 
 <details>
 <summary>1. Що таке JavaScript?</summary>
