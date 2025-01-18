@@ -7652,7 +7652,144 @@ console.log(obj.secretKey); // undefined
 </details>
 
 <details>
-<summary>124. ???</summary>
+<summary>125. Методи перехоплення та обробки помилок у JavaScript?</summary>
+
+#### Методи перехоплення та обробки помилок у JavaScript:
+
+1. **try...catch**
+
+- Обробляє синхронні помилки у коді. Не працює з асинхронними операціями (наприклад, Promise).
+
+```javascript
+try {
+  const result = JSON.parse("INVALID_JSON");
+} catch (error) {
+  console.error("Caught error:", error.message);
+}
+```
+
+2. **window.onerror**
+
+- Перехоплює необроблені помилки на рівні глобального об'єкта.
+
+```javascript
+window.onerror = (message, source, lineno, colno, error) => {
+  console.error("Global error:", message, source, lineno, colno, error);
+};
+```
+
+3. **window.addEventListener('error')**
+
+- Перехоплює помилки в зовнішніх ресурсах, таких як зображення або скрипти.
+
+```javascript
+window.addEventListener("error", (event) => {
+  console.error("Resource loading error:", event.message);
+});
+```
+
+4. **window.addEventListener('unhandledrejection')**
+
+- Обробляє необроблені відхилення обіцянок (Promise).
+
+```javascript
+window.addEventListener("unhandledrejection", (event) => {
+  console.error("Unhandled promise rejection:", event.reason);
+});
+```
+
+5. **Асинхронна обробка помилок (async/await):**
+
+- Використовуйте try...catch для обробки помилок в асинхронному коді.
+
+```javascript
+async function fetchData() {
+  try {
+    const response = await fetch("https://api.example.com");
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Async error:", error.message);
+  }
+}
+```
+
+6. **Обробка помилок у Promises:**
+
+- Використовуйте .catch для перехоплення помилок.
+
+```javascript
+fetch("https://api.example.com")
+  .then((response) => response.json())
+  .catch((error) => console.error("Promise error:", error.message));
+```
+
+7. **Користувацька помилка (Custom Error):**
+
+- Створюйте власні помилки для специфічних сценаріїв.
+
+```javascript
+class CustomError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "CustomError";
+  }
+}
+
+try {
+  throw new CustomError("Something went wrong");
+} catch (error) {
+  console.error(error.name + ":", error.message);
+}
+```
+
+8. **Декоратори для обробки помилок:**
+
+- Перехоплюють помилки в методах.
+
+```javascript
+function errorHandler(target, name, descriptor) {
+  const original = descriptor.value;
+  descriptor.value = function (...args) {
+    try {
+      return original.apply(this, args);
+    } catch (error) {
+      console.error("Error in method:", name, error.message);
+    }
+  };
+  return descriptor;
+}
+
+class Example {
+  @errorHandler
+  faultyMethod() {
+    throw new Error("Oops!");
+  }
+}
+
+new Example().faultyMethod();
+```
+
+9. **Сервіси логування:**
+
+- Використовуйте сторонні сервіси, як-от Sentry або LogRocket, для моніторингу помилок у реальному часі.
+
+```javascript
+Sentry.init({ dsn: "your-dsn-url" });
+try {
+  throw new Error("Critical error");
+} catch (error) {
+  Sentry.captureException(error);
+}
+```
+
+- **Підсумок:**
+  Обробка помилок у JavaScript охоплює широкий спектр інструментів і технік: від простого try...catch до використання глобальних обробників та спеціалізованих сервісів. Це дозволяє ефективно реагувати на помилки та покращувати надійність додатків.
+
+</details>
+
+<details>
+<summary>126. ???</summary>
 
 - Coming soon...😎
 
