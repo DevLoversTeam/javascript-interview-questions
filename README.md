@@ -1,4 +1,4 @@
-# JavaScript
+# JavaScript <img src="./assets/javascript.svg" width="25" height="25" />
 
 ## Найпопулярніші запитання та відповіді на співбесіді з JavaScript
 
